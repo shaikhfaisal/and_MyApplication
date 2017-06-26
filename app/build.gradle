@@ -42,7 +42,6 @@ dependencies {
 //    androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2.2'
 //    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 
-
 //    testCompile 'junit:junit:4.12'
 
 //    compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -54,8 +53,6 @@ dependencies {
 
 //    compile 'com.android.support:support-core-utils:23'
 
-
-
     //RAIDER config
     compile "com.android.support:support-v4:$android_dependency_version"
     compile "com.android.support:appcompat-v7:$android_dependency_version"
@@ -64,22 +61,26 @@ dependencies {
     compile "com.android.support:percent:$android_dependency_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.assertj:assertj-core:3.5.2'
-    testCompile 'org.robolectric:robolectric:3.1.4'
-    testCompile 'org.robolectric:shadows-support-v4:3.1.4'
-    testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1' // This is required for API 23 testing. Should be removed by Robolectric fix.
-    testCompile 'org.mockito:mockito-core:2.2.5'
-    testCompile 'com.nhaarman:mockito-kotlin:0.11.0'
-    testCompile 'com.squareup.okhttp3:mockwebserver:3.4.1'
-    testCompile 'com.jayway.jsonpath:json-path:2.2.0'
+    // This is required for API 23 testing. Should be removed by Robolectric fix.
 
 
 
     androidTestCompile "com.android.support:recyclerview-v7:$android_dependency_version"
     androidTestCompile "com.android.support:appcompat-v7:$android_dependency_version"
     androidTestCompile "com.android.support:design:$android_dependency_version"
+
+
+
+    compile 'com.google.firebase:firebase-auth:10.0.1'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.assertj:assertj-core:3.5.2'
+    testCompile 'org.robolectric:robolectric:3.1.4'
+    testCompile 'org.robolectric:shadows-support-v4:3.1.4'
+    testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
+    testCompile 'org.mockito:mockito-core:2.2.5'
+    testCompile 'com.nhaarman:mockito-kotlin:0.11.0'
+    testCompile 'com.squareup.okhttp3:mockwebserver:3.4.1'
+    testCompile 'com.jayway.jsonpath:json-path:2.2.0'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'
@@ -87,12 +88,11 @@ dependencies {
     androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
     androidTestCompile 'com.squareup.okhttp3:mockwebserver:3.4.1'
-
-
-
 }
 repositories {
     mavenCentral()
 }
 
 //apply plugin: 'com.google.gms.google-services'
+
+apply plugin: 'com.google.gms.google-services'

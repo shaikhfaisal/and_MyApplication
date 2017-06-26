@@ -5,8 +5,7 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
-import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
-import android.support.test.espresso.matcher.ViewMatchers.withId
+import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.runner.AndroidJUnit4
 
 
@@ -34,7 +33,6 @@ class ExampleInstrumentedTest {
     @Test
     @Throws(Exception::class)
     fun useAppContext() {
-        // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
 
         assertEquals("net.outpost17.myapplication", appContext.packageName)
@@ -51,9 +49,12 @@ class ExampleInstrumentedTest {
     @Test
     fun submitLoginDetails() {
         onView(withId(R.id.login_username)).perform(clearText())
-        onView(withId(R.id.login_username)).perform(typeText("faisal@example.com"))
-        onView(withId(R.id.login_password)).perform(typeText("123123123"))
+        onView(withId(R.id.login_username)).perform(typeText("test1@example.com"))
+        onView(withId(R.id.login_password)).perform(typeText("test1@example.com"))
         onView(withId(R.id.button_login)).perform(click())
+
+        // Check that we have landed on the next page..
+        onView(withId(R.id.display_text)).check(matches(withText("Welcome test1@example.com")))
 
     }
 
