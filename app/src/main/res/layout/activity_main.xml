@@ -9,7 +9,6 @@
     android:orientation="vertical">
 
 
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,6 +19,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login_label_username"/>
+        <TextView
+            android:id="@+id/login_username_validation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
 
         <EditText
             android:id="@+id/login_username"
@@ -43,6 +48,12 @@
             android:layout_height="wrap_content"
             android:text="@string/login_label_password"
             />
+        <TextView
+            android:id="@+id/login_password_validation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
 
 
         <EditText
@@ -60,5 +71,5 @@
         android:text="@string/login_button_text"
         android:onClick=""/>
 
-    
+
 </LinearLayout>

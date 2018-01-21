@@ -4,4 +4,7 @@
     <string name="login_label_username">Email:</string>
     <string name="login_username_default">john.smith@example.com</string>
     <string name="login_label_password">Password:</string>
+    <string name="login_password_validation_message">Please enter a password</string>
+    <string name="login_username_validation_message">Please enter a valid email address</string>
+    <string name="blank_string"></string>
 </resources>
