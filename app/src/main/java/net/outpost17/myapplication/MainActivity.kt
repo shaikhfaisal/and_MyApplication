@@ -3,6 +3,8 @@ package net.outpost17.myapplication
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.RecyclerView
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 
@@ -12,7 +14,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById(R.id.button_login).setOnClickListener { v->
+        val button = findViewById<RecyclerView>(R.id.button_login) as TextView
+        button.setOnClickListener { v  ->
 
             val username = (findViewById(R.id.login_username) as EditText).text.toString()
             val password = (findViewById(R.id.login_password) as EditText).text.toString()
@@ -29,12 +32,11 @@ class MainActivity : AppCompatActivity() {
             
 
             if (emailFormatIsValid(username) and passwordFormatIsValid(password)) {
-                val intent = Intent(this, SaveTextActivity::class.java)
 
-                intent.putExtra("username", username)
-                intent.putExtra("password", password)
+                val login_result = findViewById(R.id.login_result) as TextView
+                login_result.text = "Welcome test1@example.com"
 
-                startActivity(intent)
+                login(username, password)
             }
 
         }

@@ -50,7 +50,7 @@ class ExampleInstrumentedTest {
     fun validateEmailAddressAndPassword() {
         onView(withId(R.id.login_username)).perform(clearText())
         onView(withId(R.id.login_username)).perform(typeText("test1example.com"))
-//        onView(withId(R.id.login_password)).perform(typeText(""))
+//      onView(withId(R.id.login_password)).perform(typeText(""))
         onView(withId(R.id.button_login)).perform(click())
         onView(withId(R.id.login_username_validation)).check(matches(withText("Please enter a valid email address")))
         onView(withId(R.id.login_password_validation)).check(matches(withText("Please enter a password")))
@@ -63,7 +63,7 @@ class ExampleInstrumentedTest {
         onView(withId(R.id.login_password)).perform(typeText("test1@example.com"))
         onView(withId(R.id.button_login)).perform(click())
 
-        onView(withId(R.id.display_text)).check(matches(withText("Welcome test1@example.com")))
+        onView(withId(R.id.login_result)).check(matches(withText("Welcome test1@example.com")))
 
     }
 
