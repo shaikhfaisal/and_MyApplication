@@ -41,30 +41,22 @@ class ExampleInstrumentedTest {
 
     @Test
     fun loginScreen() {
-        onView(withId(R.id.login_label_username)).check(matches(isDisplayed()))
-        onView(withId(R.id.login_label_password)).check(matches(isDisplayed()))
-        onView(withId(R.id.button_login)).check(matches(isDisplayed()))
+        onView(withId(R.id.fast_question)).check(matches(isDisplayed()))
+        onView(withId(R.id.fast_question_yes_button)).check(matches(isDisplayed()))
+        onView(withId(R.id.fast_question_no_button)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun validateEmailAddressAndPassword() {
-        onView(withId(R.id.login_username)).perform(clearText())
-        onView(withId(R.id.login_username)).perform(typeText("test1example.com"))
-//      onView(withId(R.id.login_password)).perform(typeText(""))
-        onView(withId(R.id.button_login)).perform(click())
-        onView(withId(R.id.login_username_validation)).check(matches(withText("Please enter a valid email address")))
-        onView(withId(R.id.login_password_validation)).check(matches(withText("Please enter a password")))
+    fun clickYes() {
+        onView(withId(R.id.fast_question_yes_button)).perform(click())
+        onView(withText(R.string.fasted_confirmation_text)).check(matches(isDisplayed()))
     }
 
     @Test
-    fun submitLoginDetails() {
-        onView(withId(R.id.login_username)).perform(clearText())
-        onView(withId(R.id.login_username)).perform(typeText("test1@example.com"))
-        onView(withId(R.id.login_password)).perform(typeText("test1@example.com"))
-        onView(withId(R.id.button_login)).perform(click())
-
-        onView(withId(R.id.login_result)).check(matches(withText("Welcome test1@example.com")))
-
+    fun clickNo() {
+        onView(withId(R.id.fast_question_no_button)).perform(click())
+        onView(withText(R.string.fasted_nonconfirmation_text)).check(matches(isDisplayed()))
     }
+
 
 }
