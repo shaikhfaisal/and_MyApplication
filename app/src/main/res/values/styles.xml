@@ -8,4 +8,39 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+
+    <!--<style name="EvenSplit">-->
+        <!--<item name="android:layout_height">0dp</item>-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_weight">1</item>-->
+    <!--</style>-->
+
+
+    <style name="BigNumberLabel">
+        <item name="android:textSize">5pt</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="BigNumberLabel.EvenSplit">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+
+
+    <style name="BigNumber">
+        <item name="android:textSize">25pt</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="BigNumber.EvenSplit">
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+
+
 </resources>

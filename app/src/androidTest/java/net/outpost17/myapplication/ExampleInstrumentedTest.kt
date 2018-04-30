@@ -6,6 +6,7 @@ import android.support.test.espresso.Espresso.onView
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.matcher.ViewMatchers.*
+import android.support.test.espresso.web.webdriver.DriverAtoms.getText
 import android.support.test.runner.AndroidJUnit4
 
 
@@ -15,6 +16,8 @@ import org.junit.runner.RunWith
 
 import org.junit.Assert.*
 import android.support.test.rule.ActivityTestRule
+import android.util.Log
+import android.widget.TextView
 import org.junit.Rule
 
 
@@ -40,7 +43,7 @@ class ExampleInstrumentedTest {
 
 
     @Test
-    fun loginScreen() {
+    fun homeScreen() {
         onView(withId(R.id.fast_question)).check(matches(isDisplayed()))
         onView(withId(R.id.fast_question_yes_button)).check(matches(isDisplayed()))
         onView(withId(R.id.fast_question_no_button)).check(matches(isDisplayed()))
