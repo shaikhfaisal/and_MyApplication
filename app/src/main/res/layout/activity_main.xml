@@ -37,14 +37,13 @@
 
                 <TextView
                     style="@style/BigNumberLabel.EvenSplit"
-                    android:text="Days Fasted"
-                    />
+                    android:text="Days Fasted" />
 
                 <TextView
                     style="@style/BigNumber.EvenSplit"
                     android:id="@+id/fast_yes_count"
                     android:text="0"
-                    android:layout_marginBottom="20dp"
+
                     />
 
             </LinearLayout>
@@ -66,7 +65,7 @@
                     style="@style/BigNumber.EvenSplit"
                     android:id="@+id/fast_no_count"
                     android:text="0"
-                    android:layout_marginBottom="20dp"
+
                     />
             </LinearLayout>
 
