@@ -6,17 +6,20 @@ import android.util.Log
 import android.view.View
 import android.support.design.widget.Snackbar
 import android.widget.TextView
+import com.jakewharton.threetenabp.AndroidThreeTen
+import org.threeten.bp.LocalDate
 
 
 class MainActivity : AppCompatActivity() {
 
-    var yes_count = 0;
-    var no_count = 0;
+
+    val appLog:AppLog = AppLog()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        AndroidThreeTen.init(this);
 
 
 
@@ -27,9 +30,12 @@ class MainActivity : AppCompatActivity() {
     fun handleYesClick(view: View) {
 
 
+        val today = LocalDate.now()
+        appLog.didFastOn(today)
 
-        yes_count++;
-        findViewById<TextView>(R.id.fast_yes_count).setText(yes_count.toString())
+        val totalNumberOfFasts = appLog.getTotalNumberOfFasts()
+
+        findViewById<TextView>(R.id.fast_yes_count).setText(totalNumberOfFasts.toString())
 
         Log.i("MyApp", "Clicked yes ")
         val mySnackbar = Snackbar.make(view, R.string.fasted_confirmation_text, Snackbar.LENGTH_SHORT)
@@ -39,11 +45,14 @@ class MainActivity : AppCompatActivity() {
     fun handleNoClick(view: View) {
 
 
+        val today = LocalDate.now()
+        appLog.missedFastOn(today)
 
-        no_count++;
-        findViewById<TextView>(R.id.fast_no_count).setText(no_count.toString())
+        val totalNumberOfMissedFasts = appLog.getTotalNumberOfMissedFasts()
+        findViewById<TextView>(R.id.fast_no_count).setText(totalNumberOfMissedFasts.toString())
 
         Log.i("MyApp", "Clicked no ")
+
         val mySnackbar = Snackbar.make(view, R.string.fasted_nonconfirmation_text, Snackbar.LENGTH_SHORT)
         mySnackbar.show();
     }

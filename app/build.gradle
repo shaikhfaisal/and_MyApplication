@@ -40,6 +40,9 @@ dependencies {
     compile "com.android.support:percent:$android_dependency_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
+    // Backport of LocalDate classes for Android
+    compile "com.jakewharton.threetenabp:threetenabp:1.1.0"
+
     androidTestCompile "com.android.support:recyclerview-v7:$android_dependency_version"
     androidTestCompile "com.android.support:appcompat-v7:$android_dependency_version"
     androidTestCompile "com.android.support:design:$android_dependency_version"

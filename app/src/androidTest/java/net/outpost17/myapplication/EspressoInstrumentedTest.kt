@@ -27,7 +27,7 @@ import org.junit.Rule
  * @see [Testing documentation](http://d.android.com/tools/testing)
  */
 @RunWith(AndroidJUnit4::class)
-class ExampleInstrumentedTest {
+class EspressoInstrumentedTest {
 
     @get:Rule
     var mActivityRule = ActivityTestRule(MainActivity::class.java)
@@ -53,12 +53,14 @@ class ExampleInstrumentedTest {
     fun clickYes() {
         onView(withId(R.id.fast_question_yes_button)).perform(click())
         onView(withText(R.string.fasted_confirmation_text)).check(matches(isDisplayed()))
+        onView(withText("1")).check(matches(isDisplayed()))
     }
 
     @Test
     fun clickNo() {
         onView(withId(R.id.fast_question_no_button)).perform(click())
         onView(withText(R.string.fasted_nonconfirmation_text)).check(matches(isDisplayed()))
+        onView(withText("1")).check(matches(isDisplayed()))
     }
 
 
