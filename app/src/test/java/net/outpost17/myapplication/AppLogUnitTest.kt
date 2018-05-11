@@ -86,8 +86,8 @@ class AppLogUnitTest {
         log.missedFastOn(LocalDate.of(2018,Month.MAY, 1))
         log.didFastOn(LocalDate.of(2018,Month.MAY, 1))
 
-        assertEquals(1, log.getTotalNumberOfMissedFasts())
-        assertEquals(0, log.getTotalNumberOfFasts())
+        assertEquals(0, log.getTotalNumberOfMissedFasts())
+        assertEquals(1, log.getTotalNumberOfFasts())
 
 
 
@@ -96,6 +96,39 @@ class AppLogUnitTest {
 
         assertEquals(1, log.getTotalNumberOfFasts())
         assertEquals(1, log.getTotalNumberOfMissedFasts())
+    }
+
+
+    @Test
+    fun testDidFastMeansNegatingAnyNotFastsOnTheSameDay() {
+
+        val log = AppLog()
+
+        log.missedFastOn(LocalDate.of(2018, Month.AUGUST, 28))
+        assertEquals(1, log.getTotalNumberOfMissedFasts())
+
+        log.didFastOn(LocalDate.of(2018, Month.AUGUST, 28))
+
+        assertEquals(0, log.getTotalNumberOfMissedFasts())
+        assertEquals(1, log.getTotalNumberOfFasts())
+
+
+    }
+
+    @Test
+    fun testMissedFastMeansNegatingFastsOnTheSameDay() {
+
+        val log = AppLog()
+
+        log.didFastOn(LocalDate.of(2018, Month.AUGUST, 28))
+        assertEquals(1, log.getTotalNumberOfFasts())
+
+        log.missedFastOn(LocalDate.of(2018, Month.AUGUST, 28))
+
+        assertEquals(1, log.getTotalNumberOfMissedFasts())
+        assertEquals(0, log.getTotalNumberOfFasts())
+
+
     }
 
 }

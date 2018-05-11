@@ -33,9 +33,7 @@ class MainActivity : AppCompatActivity() {
         val today = LocalDate.now()
         appLog.didFastOn(today)
 
-        val totalNumberOfFasts = appLog.getTotalNumberOfFasts()
-
-        findViewById<TextView>(R.id.fast_yes_count).setText(totalNumberOfFasts.toString())
+        this.updateCounters()
 
         Log.i("MyApp", "Clicked yes ")
         val mySnackbar = Snackbar.make(view, R.string.fasted_confirmation_text, Snackbar.LENGTH_SHORT)
@@ -48,13 +46,23 @@ class MainActivity : AppCompatActivity() {
         val today = LocalDate.now()
         appLog.missedFastOn(today)
 
-        val totalNumberOfMissedFasts = appLog.getTotalNumberOfMissedFasts()
-        findViewById<TextView>(R.id.fast_no_count).setText(totalNumberOfMissedFasts.toString())
+        this.updateCounters()
 
         Log.i("MyApp", "Clicked no ")
 
         val mySnackbar = Snackbar.make(view, R.string.fasted_nonconfirmation_text, Snackbar.LENGTH_SHORT)
         mySnackbar.show();
+    }
+
+    private fun updateCounters() {
+
+        val totalNumberOfFasts = appLog.getTotalNumberOfFasts()
+        findViewById<TextView>(R.id.fast_yes_count).setText(totalNumberOfFasts.toString())
+
+        val totalNumberOfMissedFasts = appLog.getTotalNumberOfMissedFasts()
+        findViewById<TextView>(R.id.fast_no_count).setText(totalNumberOfMissedFasts.toString())
+
+
     }
 
 

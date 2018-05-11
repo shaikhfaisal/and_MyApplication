@@ -22,8 +22,9 @@ class AppLog {
 
     fun didFastOn(date_of_fast: LocalDate) {
 
-        if (dateHasNotNeenLogged (date_of_fast)) {
+        if ( ! days_fasted.contains(date_of_fast) ) {
             days_fasted.add(date_of_fast)
+            days_missed_fasted.removeAll { it == date_of_fast }
         }
 
     }
@@ -35,8 +36,9 @@ class AppLog {
 
 
     fun missedFastOn(date_of_fast: LocalDate) {
-        if (dateHasNotNeenLogged (date_of_fast)) {
+        if ( !days_missed_fasted.contains (date_of_fast)) {
             days_missed_fasted.add(date_of_fast)
+            days_fasted.removeAll { it == date_of_fast }
         }
 
     }
