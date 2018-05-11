@@ -16,8 +16,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SaveTextActivity"></activity>
-
     </application>
 
 </manifest>
