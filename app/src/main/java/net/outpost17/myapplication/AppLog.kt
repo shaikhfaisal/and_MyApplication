@@ -1,50 +1,53 @@
 package net.outpost17.myapplication
 
 import org.threeten.bp.LocalDate
-
+import android.arch.persistence.room.Dao
 
 class AppLog {
 
-    var days_fasted:MutableList<LocalDate> = mutableListOf<LocalDate>()
-
-    var days_missed_fasted:MutableList<LocalDate> = mutableListOf<LocalDate>()
-
-
-
-    private fun dateHasNotNeenLogged(date: LocalDate) : Boolean {
-
-        if( ! days_fasted.contains(date) and ! days_missed_fasted.contains(date)) {
-            return true
-        }
-
-        return false
-    }
+    var activity_days:MutableList<ActivityDate> = mutableListOf<ActivityDate>()
 
     fun didFastOn(date_of_fast: LocalDate) {
-
-        if ( ! days_fasted.contains(date_of_fast) ) {
-            days_fasted.add(date_of_fast)
-            days_missed_fasted.removeAll { it == date_of_fast }
-        }
-
+        this.recordFastStatusOn(date_of_fast, true)
     }
-
-    fun getTotalNumberOfFasts() : Int {
-        return days_fasted.size
-    }
-
 
 
     fun missedFastOn(date_of_fast: LocalDate) {
-        if ( !days_missed_fasted.contains (date_of_fast)) {
-            days_missed_fasted.add(date_of_fast)
-            days_fasted.removeAll { it == date_of_fast }
-        }
-
+        this.recordFastStatusOn(date_of_fast, false)
     }
+
+
+    fun getTotalNumberOfFasts() : Int {
+        return activity_days.filter { it.did_fast == true }.size
+    }
+
 
     fun getTotalNumberOfMissedFasts() : Int {
-        return days_missed_fasted.size
+        return activity_days.filter { it.did_fast == false }.size
     }
+
+
+    private fun recordFastStatusOn(date_of_fast: LocalDate, was_fast_succesfull: Boolean) {
+        val ad = ActivityDate(date_of_fast)
+        ad.did_fast = was_fast_succesfull
+
+        if (activity_days.contains(ad)) {
+            activity_days.get(activity_days.indexOf(ad)).did_fast = was_fast_succesfull
+        } else {
+            activity_days.add(ad)
+        }
+    }
+
+}
+
+data class ActivityDate (val activity_date: LocalDate= LocalDate.now()) {
+
+    var did_fast: Boolean = false
+
+}
+
+@Dao
+public interface ActivityDateDAO {
+
 
 }
