@@ -8,6 +8,9 @@ import android.support.design.widget.Snackbar
 import android.widget.TextView
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.threeten.bp.LocalDate
+import android.arch.persistence.room.Room
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -21,7 +24,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         AndroidThreeTen.init(this);
 
-
+//        val db = Room.databaseBuilder(applicationContext,
+//                ActivityDatabase::class.java, "activity_database").build()
+        
 
     }
 

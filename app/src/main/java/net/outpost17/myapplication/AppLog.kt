@@ -1,7 +1,8 @@
 package net.outpost17.myapplication
 
+import android.arch.persistence.room.*
 import org.threeten.bp.LocalDate
-import android.arch.persistence.room.Dao
+import org.threeten.bp.format.DateTimeFormatter.*
 
 class AppLog {
 
@@ -40,14 +41,81 @@ class AppLog {
 
 }
 
-data class ActivityDate (val activity_date: LocalDate= LocalDate.now()) {
+@TypeConverters(LocalDateTypeConvertor::class)
+@Entity
+data class ActivityDate (@PrimaryKey var activity_date: LocalDate = LocalDate.now()) {
 
     var did_fast: Boolean = false
 
 }
 
-@Dao
-public interface ActivityDateDAO {
+class LocalDateTypeConvertor {
 
+    @TypeConverter
+    fun localdate_to_date(localDate: LocalDate) : String {
+        return localDate.format(BASIC_ISO_DATE)
+    }
+
+    @TypeConverter
+    fun date_to_localdate(date_string: String): LocalDate {
+        return BASIC_ISO_DATE.parse(date_string, org.threeten.bp.LocalDate::from)
+    }
+}
+
+
+@Dao
+interface ActivityDateDAO {
+
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    fun insertall (vararg activityDate : ActivityDate)
+
+    @Query("select * from activitydate")
+    fun getAll(): List<ActivityDate>
+
+}
+
+@Database (entities = arrayOf(ActivityDate::class), version = 1)
+abstract class ActivityDatabase : RoomDatabase() {
+
+    abstract fun activityDateDAO(): ActivityDateDAO
+
+    companion object {
+        var INSTANCE :ActivityDatabase? = null
+
+//        fun getDatabase(context: Context): ActivityDatabase? {
+//
+//            if (INSTANCE == null) {
+//                INSTANCE = Room.databaseBuilder<ActivityDatabase>(
+//                        context.applicationContext(),
+//                        ActivityDatabase::class.java,
+//                        "RamdanDiary.db"
+//                )
+//                        .allowMainThreadQueries()
+//                        .build()
+//            }
+//
+//            return INSTANCE
+//
+//
+//        }
+//
+//
+//        fun getInMemoryDatabase(context: Context): ActivityDatabase? {
+//
+//            if (INSTANCE == null) {
+//
+//                INSTANCE = Room.inMemoryDatabaseBuilder<ActivityDatabase>(
+//                        context.applicationContext,
+//                        ActivityDatabase::class.java
+//                )
+//                        // To simplify the codelab, allow queries on the main thread.
+//                        // Don't do this on a real app! See PersistenceBasicSample for an example.
+//                        .allowMainThreadQueries()
+//                        .build()
+//            }
+//            return INSTANCE
+//        }
+
+    }
 
 }
