@@ -10,6 +10,12 @@ class AppLog (db: ActivityDatabase) {
 
     val db: ActivityDatabase = db
 
+    init {
+
+        activity_days = db.activityDateDAO().getAll()
+
+    }
+
     fun didFastOn(date_of_fast: LocalDate) {
         this.recordFastStatusOn(date_of_fast, true)
     }
@@ -75,7 +81,7 @@ interface ActivityDateDAO {
     fun insertall (vararg activityDate : ActivityDate)
 
     @Query("select * from activitydate")
-    fun getAll(): List<ActivityDate>
+    fun getAll(): MutableList<ActivityDate>
 
     @Update
     fun update (activityDate: ActivityDate)

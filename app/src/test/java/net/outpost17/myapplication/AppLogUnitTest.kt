@@ -171,4 +171,36 @@ class AppLogUnitTest {
         verify(mockActivityDateDao, times(2)).update(ad)
     }
 
+    @Test
+    fun testReadsInitialStateCorrectlyFromDatabase() {
+
+        val mockActivityDateDao: ActivityDateDAO = mock(ActivityDateDAO::class.java)
+
+        val ld1 = LocalDate.of(2018,Month.MAY, 1)
+        val ad1 = ActivityDate(ld1)
+        ad1.did_fast = true
+
+        val ld2 = LocalDate.of(2018,Month.MAY, 2)
+        val ad2 = ActivityDate(ld2)
+        ad2.did_fast = true
+
+        val ld3 = LocalDate.of(2018,Month.MAY, 3)
+        val ad3 = ActivityDate(ld3)
+        ad3.did_fast = false
+
+        val ads: MutableList<ActivityDate> = mutableListOf(ad1, ad2, ad3)
+
+        `when`(mockActivityDateDao.getAll()).thenReturn(ads)
+
+        val mockedDatabase: ActivityDatabase = mock(ActivityDatabase::class.java)
+        `when`(mockedDatabase.activityDateDAO()).thenReturn(mockActivityDateDao)
+
+        val a = AppLog(mockedDatabase)
+
+
+        assertEquals(1, a.getTotalNumberOfMissedFasts())
+        assertEquals(2, a.getTotalNumberOfFasts())
+
+    }
+
 }

@@ -36,6 +36,11 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
+        this.updateCounters()
+    }
+
 
 
     fun handleYesClick(view: View) {
