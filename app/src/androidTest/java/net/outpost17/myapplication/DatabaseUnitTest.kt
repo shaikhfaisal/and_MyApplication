@@ -15,7 +15,7 @@ import org.threeten.bp.format.DateTimeFormatter
 
 class DatabaseUnitTest {
 
-    private var mDatabase: ActivityDatabase? = null;
+    lateinit private var mDatabase: ActivityDatabase
 
 
     @Before

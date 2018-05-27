@@ -3,9 +3,10 @@ package net.outpost17.myapplication
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before
 import org.threeten.bp.Month
 import org.threeten.bp.LocalDate
-
+import org.mockito.Mockito.*
 
 
 /**
@@ -16,19 +17,36 @@ import org.threeten.bp.LocalDate
 class AppLogUnitTest {
 
 
-    @Test
-    fun testDidFastOnSingleDay () {
+    lateinit var log: AppLog
 
-        val log = AppLog()
-        log.didFastOn(LocalDate.of(2018,Month.MAY, 1))
+    @Before
+    /*
+        Initialise mocked database and setup AppLog
+     */
+    fun init() {
 
-        assertEquals(1, log.getTotalNumberOfFasts())
+        val mockActivityDateDao: ActivityDateDAO = mock(ActivityDateDAO::class.java)
+        val mockedDatabase: ActivityDatabase = mock(ActivityDatabase::class.java)
+
+        `when`(mockedDatabase.activityDateDAO()).thenReturn(mockActivityDateDao)
+
+        this.log = AppLog(mockedDatabase)
 
     }
 
+
+    @Test
+    fun testDidFastOnSingleDay () {
+
+        log.didFastOn(LocalDate.of(2018,Month.MAY, 1))
+
+        assertEquals(1, log.getTotalNumberOfFasts())
+    }
+
+
     @Test
     fun testDidFastOnMultipleDays () {
-        val log = AppLog()
+
         log.didFastOn(LocalDate.of(2018,Month.MAY, 1))
         log.didFastOn(LocalDate.of(2018,Month.MAY, 2))
         log.didFastOn(LocalDate.of(2018,Month.MAY, 3))
@@ -36,9 +54,10 @@ class AppLogUnitTest {
         assertEquals(3, log.getTotalNumberOfFasts())
     }
 
+
     @Test
     fun testMultipleFastsOnSameDayCountAsOneFast() {
-        val log = AppLog()
+
         log.didFastOn(LocalDate.of(2018,Month.MAY, 1))
         log.didFastOn(LocalDate.of(2018,Month.MAY, 1))
         log.didFastOn(LocalDate.of(2018,Month.MAY, 1))
@@ -47,21 +66,19 @@ class AppLogUnitTest {
     }
 
 
-
-
     @Test
     fun testMissedFastOnSingleDay () {
 
-        val log = AppLog()
         log.missedFastOn(LocalDate.of(2018,Month.MAY, 1))
 
         assertEquals(1, log.getTotalNumberOfMissedFasts())
 
     }
 
+
     @Test
     fun testMissedFastOnMultipleDays () {
-        val log = AppLog()
+
         log.missedFastOn(LocalDate.of(2018,Month.MAY, 1))
         log.missedFastOn(LocalDate.of(2018,Month.MAY, 2))
         log.missedFastOn(LocalDate.of(2018,Month.MAY, 3))
@@ -69,9 +86,10 @@ class AppLogUnitTest {
         assertEquals(3, log.getTotalNumberOfMissedFasts())
     }
 
+
     @Test
     fun testMultipleMissedFastsOnSameDayCountAsOneMissedFast() {
-        val log = AppLog()
+
         log.missedFastOn(LocalDate.of(2018,Month.MAY, 1))
         log.missedFastOn(LocalDate.of(2018,Month.MAY, 1))
         log.missedFastOn(LocalDate.of(2018,Month.MAY, 1))
@@ -80,17 +98,14 @@ class AppLogUnitTest {
     }
 
 
-
     @Test
     fun testCantFastAndMissFastOnSameDay() {
-        val log = AppLog()
 
         log.missedFastOn(LocalDate.of(2018,Month.MAY, 1))
         log.didFastOn(LocalDate.of(2018,Month.MAY, 1))
 
         assertEquals(0, log.getTotalNumberOfMissedFasts())
         assertEquals(1, log.getTotalNumberOfFasts())
-
 
 
         log.didFastOn(LocalDate.of(2018, Month.MAY, 2))
@@ -104,8 +119,6 @@ class AppLogUnitTest {
     @Test
     fun testDidFastMeansNegatingAnyNotFastsOnTheSameDay() {
 
-        val log = AppLog()
-
         log.missedFastOn(LocalDate.of(2018, Month.AUGUST, 28))
         assertEquals(1, log.getTotalNumberOfMissedFasts())
 
@@ -117,10 +130,9 @@ class AppLogUnitTest {
 
     }
 
+
     @Test
     fun testMissedFastMeansNegatingFastsOnTheSameDay() {
-
-        val log = AppLog()
 
         log.didFastOn(LocalDate.of(2018, Month.AUGUST, 28))
         assertEquals(1, log.getTotalNumberOfFasts())
@@ -131,6 +143,32 @@ class AppLogUnitTest {
         assertEquals(0, log.getTotalNumberOfFasts())
 
 
+    }
+
+
+    @Test
+    /*
+        Tests database calls come through correctly from the AppLog service.
+     */
+    fun testDatabaseGetsUpdatedForNewAndExistingDay () {
+
+        val mockActivityDateDao: ActivityDateDAO = mock(ActivityDateDAO::class.java)
+        val mockedDatabase: ActivityDatabase = mock(ActivityDatabase::class.java)
+        `when`(mockedDatabase.activityDateDAO()).thenReturn(mockActivityDateDao)
+
+        val a = AppLog(mockedDatabase)
+
+        val ld = LocalDate.of(2018,Month.MAY, 1)
+        val ad = ActivityDate(ld)
+        ad.did_fast = true
+
+
+        a.didFastOn(ld)
+        verify(mockActivityDateDao).insertall(ad)
+
+        a.missedFastOn(ld)
+        a.didFastOn(ld)
+        verify(mockActivityDateDao, times(2)).update(ad)
     }
 
 }

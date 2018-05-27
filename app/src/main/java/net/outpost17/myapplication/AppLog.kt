@@ -4,9 +4,11 @@ import android.arch.persistence.room.*
 import org.threeten.bp.LocalDate
 import org.threeten.bp.format.DateTimeFormatter.*
 
-class AppLog {
+class AppLog (db: ActivityDatabase) {
 
     var activity_days:MutableList<ActivityDate> = mutableListOf<ActivityDate>()
+
+    val db: ActivityDatabase = db
 
     fun didFastOn(date_of_fast: LocalDate) {
         this.recordFastStatusOn(date_of_fast, true)
@@ -34,8 +36,11 @@ class AppLog {
 
         if (activity_days.contains(ad)) {
             activity_days.get(activity_days.indexOf(ad)).did_fast = was_fast_succesfull
+            db.activityDateDAO().update(ad)
         } else {
             activity_days.add(ad)
+
+            db.activityDateDAO().insertall(ad)
         }
     }
 
@@ -71,6 +76,9 @@ interface ActivityDateDAO {
 
     @Query("select * from activitydate")
     fun getAll(): List<ActivityDate>
+
+    @Update
+    fun update (activityDate: ActivityDate)
 
 }
 

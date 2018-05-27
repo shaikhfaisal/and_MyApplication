@@ -16,7 +16,7 @@ import android.arch.persistence.room.Room
 class MainActivity : AppCompatActivity() {
 
 
-    val appLog:AppLog = AppLog()
+    private lateinit var appLog:AppLog
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -24,9 +24,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         AndroidThreeTen.init(this);
 
-//        val db = Room.databaseBuilder(applicationContext,
-//                ActivityDatabase::class.java, "activity_database").build()
-        
+        val db = Room.databaseBuilder(
+                    applicationContext,
+                    ActivityDatabase::class.java,
+                    "activity_database"
+                )
+                .allowMainThreadQueries()
+                .build()
+
+        this.appLog = AppLog(db)
 
     }
 
