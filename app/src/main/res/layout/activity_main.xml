@@ -77,19 +77,37 @@
 
 
 
-
-
-        <TextView
-            android:id="@+id/fast_question"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fast_label_text"
-
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:id="@+id/container_fast_questions"
             android:layout_below="@id/container_fast_counts"
-            />
+            >
+
+            <TextView
+                android:id="@+id/fast_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fast_label_text"
+
+
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_date_range_24px"
+                android:paddingTop="15dp"
+                android:onClick="showDatePickerDialog"
+                />
+
+        </LinearLayout>
+
 
         <Button
             android:id="@+id/fast_question_yes_button"
@@ -97,7 +115,7 @@
             android:layout_height="wrap_content"
             android:onClick="handleYesClick"
             android:text="@string/fast_label_yes_text"
-            android:layout_below="@id/fast_question"
+            android:layout_below="@id/container_fast_questions"
             android:layout_centerInParent="true"
             />
 
