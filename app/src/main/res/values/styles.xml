@@ -18,7 +18,7 @@
 
 
     <style name="BigNumberLabel">
-        <item name="android:textSize">5pt</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -31,7 +31,7 @@
 
 
     <style name="BigNumber">
-        <item name="android:textSize">25pt</item>
+        <item name="android:textSize">96sp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textStyle">bold</item>
     </style>

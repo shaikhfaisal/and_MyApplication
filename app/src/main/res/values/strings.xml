@@ -1,7 +1,7 @@
 <resources>
 
 
-    <string name="fast_label_text">Did you fast today?</string>
+    <string name="fast_label_text">Did you fast?</string>
     <string name="fast_label_yes_text">Yes</string>
     <string name="fast_label_no_text">No</string>
 
