@@ -95,41 +95,6 @@ abstract class ActivityDatabase : RoomDatabase() {
 
     companion object {
         var INSTANCE :ActivityDatabase? = null
-
-//        fun getDatabase(context: Context): ActivityDatabase? {
-//
-//            if (INSTANCE == null) {
-//                INSTANCE = Room.databaseBuilder<ActivityDatabase>(
-//                        context.applicationContext(),
-//                        ActivityDatabase::class.java,
-//                        "RamdanDiary.db"
-//                )
-//                        .allowMainThreadQueries()
-//                        .build()
-//            }
-//
-//            return INSTANCE
-//
-//
-//        }
-//
-//
-//        fun getInMemoryDatabase(context: Context): ActivityDatabase? {
-//
-//            if (INSTANCE == null) {
-//
-//                INSTANCE = Room.inMemoryDatabaseBuilder<ActivityDatabase>(
-//                        context.applicationContext,
-//                        ActivityDatabase::class.java
-//                )
-//                        // To simplify the codelab, allow queries on the main thread.
-//                        // Don't do this on a real app! See PersistenceBasicSample for an example.
-//                        .allowMainThreadQueries()
-//                        .build()
-//            }
-//            return INSTANCE
-//        }
-
     }
 
 }

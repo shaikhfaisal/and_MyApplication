@@ -1,6 +1,5 @@
 package net.outpost17.myapplication
 
-import android.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,29 +11,8 @@ import org.threeten.bp.LocalDate
 import android.arch.persistence.room.Room
 import android.widget.DatePicker
 import android.app.DatePickerDialog
-import android.app.Dialog
-import android.app.DialogFragment
 import org.threeten.bp.ZoneId
-import java.util.*
 
-
-//class DatePickerFragment : DialogFragment(), DatePickerDialog.OnDateSetListener {
-//
-//    override fun onCreateDialog(savedInstanceState: Bundle): Dialog {
-//         Use the current date as the default date in the picker
-//        val c = Calendar.getInstance()
-//        val year = c.get(Calendar.YEAR)
-//        val month = c.get(Calendar.MONTH)
-//        val day = c.get(Calendar.DAY_OF_MONTH)
-//
-//         Create a new instance of DatePickerDialog and return it
-//        return DatePickerDialog(getActivity(), this, year, month, day)
-//    }
-//
-//    override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-//         Do something with the date chosen by the user
-//    }
-//}
 
 class MainActivity : AppCompatActivity() {
 
