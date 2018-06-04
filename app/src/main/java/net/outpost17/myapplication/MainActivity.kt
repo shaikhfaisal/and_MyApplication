@@ -14,6 +14,7 @@ import android.widget.DatePicker
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.DialogFragment
+import org.threeten.bp.ZoneId
 import java.util.*
 
 
@@ -40,13 +41,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appLog:AppLog
 
-    private var selectedDate: LocalDate = LocalDate.now()
+    private lateinit var selectedDate: LocalDate
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         AndroidThreeTen.init(this);
+        selectedDate = LocalDate.now(ZoneId.systemDefault())
 
         val db = Room.databaseBuilder(
                     applicationContext,
